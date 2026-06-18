@@ -1,0 +1,8 @@
+# Add one sensitive term per line before release.
+# Examples:
+# Real Author Name
+# author-email@example.edu
+# institution-name
+# lab-name
+# github-username
+# private-project-name

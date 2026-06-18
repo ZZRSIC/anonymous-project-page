@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+node_modules/
+.cache/
+dist/
+build/
+materials/*.zip
+materials/*.tar.gz
+materials/overleaf-source/
+materials/raw/

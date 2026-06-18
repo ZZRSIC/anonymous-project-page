@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="googlebot" content="noindex,nofollow,noarchive">
+    <meta name="referrer" content="no-referrer">
+    <meta
+      name="description"
+      content="Anonymous DriveStack-VLA project page for double-blind review."
+    >
+    <title>DriveStack-VLA | Anonymous Project Page</title>
+    <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="static/css/site.css">
+  </head>
+  <body>
+    <main id="top">
+      <section class="publication-header">
+        <div class="container header-container">
+          <h1 class="publication-title">DriveStack-VLA</h1>
+          <p class="publication-subtitle">
+            Render-Teacher Alignment and Self-Critique for End-to-End Autonomous Driving
+          </p>
+          <p class="publication-authors">Anonymous Authors</p>
+          <p class="publication-venue">Under double-blind review</p>
+
+          <div class="link-block">
+            <a class="button is-dark" href="#abstract">Abstract</a>
+            <a class="button is-dark" href="#method">Method</a>
+            <a class="button is-dark" href="#supplementary">Supplementary</a>
+            <a class="button is-dark" href="#results">Results</a>
+            <a class="button is-dark" href="#qualitative">Qualitative</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="teaser-section">
+        <div class="container">
+          <figure class="publication-banner">
+            <img
+              src="static/images/training-pipeline.png"
+              alt="Training pipeline of DriveStack-VLA"
+              width="1460"
+              height="673"
+            >
+          </figure>
+          <p class="teaser-caption">
+            Training pipeline of DriveStack-VLA from the anonymous manuscript: Stage 1 performs SFT with
+            Render-Teacher Alignment, Stage 2 applies GRPO-based RFT, and Stage 3 trains lightweight scoring and
+            refinement heads.
+          </p>
+        </div>
+      </section>
+
+      <section id="abstract" class="section">
+        <div class="container content-container">
+          <h2 class="section-title">Abstract</h2>
+          <p>
+            Vision-Language-Action driving models convert a pretrained Vision-Language Model into a driving policy,
+            allowing them to use world knowledge and follow language goals. DriveStack-VLA addresses weak visual
+            geometry modeling, insufficient scenario diversity, incomplete perceptual cues in expert demonstrations,
+            and limited support for multimodal trajectory outputs.
+          </p>
+          <p>
+            The framework injects a Bird-Eye-View representation into the language-model decoder through a multilevel
+            pathway, aligns real-image perception with rasterized render-teacher signals, and uses reinforcement
+            fine-tuning with self-critique to select and refine sampled trajectories.
+          </p>
+        </div>
+      </section>
+
+      <section id="method" class="section is-light">
+        <div class="container content-container">
+          <h2 class="section-title">Method Overview</h2>
+          <div class="method-grid">
+            <article class="method-card">
+              <span class="tag">Stage 1</span>
+              <h3>Render-Teacher Alignment</h3>
+              <p>
+                Aligns real-image perceptual focus with rasterized render-teacher signals, strengthening geometric and
+                safety-critical cues before policy alignment.
+              </p>
+            </article>
+            <article class="method-card">
+              <span class="tag">Stage 2</span>
+              <h3>GRPO-Based RFT</h3>
+              <p>
+                Samples candidate action-token sequences and optimizes them with a joint reward for trajectory quality
+                and strict format consistency.
+              </p>
+            </article>
+            <article class="method-card">
+              <span class="tag">Stage 3</span>
+              <h3>Self-Critique</h3>
+              <p>
+                Scores candidate trajectories, selects the best plan, and conditionally refines a candidate when the
+                confidence threshold is not satisfied.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="supplementary" class="section">
+        <div class="container content-container">
+          <h2 class="section-title">Supplementary Details</h2>
+          <p class="section-intro">
+            The appendix content is extracted into native webpage text for direct reading on this site.
+          </p>
+
+          <div class="supp-grid">
+            <article class="supp-card">
+              <h3>Frozen Reference KL</h3>
+              <p>
+                Stage-2 keeps the actor close to the supervised Stage-1 prior by regularizing each sampled candidate
+                against a frozen reference policy initialized from the SFT checkpoint.
+              </p>
+              <div class="formula">D_KL ~= r_ref - log(r_ref) - 1</div>
+            </article>
+            <article class="supp-card">
+              <h3>Joint Reward</h3>
+              <p>
+                The driving reward averages normalized NC, TTC, and DAC scores. The format reward combines length,
+                token-range, and schema terms to preserve strict decodability.
+              </p>
+              <div class="formula">r = r_driving + alpha_fmt * r_fmt</div>
+            </article>
+          </div>
+
+          <div class="algorithm-box">
+            <h3>GRPO Training Loop</h3>
+            <ol>
+              <li>Sample an observation and generate a group of candidate action-token sequences.</li>
+              <li>Decode format-valid candidates and compute driving rewards.</li>
+              <li>Compute the format reward for every sampled sequence.</li>
+              <li>Normalize rewards within the group to obtain relative advantages.</li>
+              <li>Apply the clipped GRPO objective with reference-policy KL regularization.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="section is-light">
+        <div class="container wide-container">
+          <h2 class="section-title">Additional Results</h2>
+          <div class="metric-row">
+            <div class="metric-card">
+              <span>91.6</span>
+              <p>PDMS on NAVSIMv1</p>
+            </div>
+            <div class="metric-card">
+              <span>91.0</span>
+              <p>EPDMS on NAVSIMv2</p>
+            </div>
+            <div class="metric-card">
+              <span>79.49</span>
+              <p>Bench2Drive driving score</p>
+            </div>
+            <div class="metric-card">
+              <span>56.36%</span>
+              <p>Bench2Drive success rate</p>
+            </div>
+          </div>
+
+          <div class="table-panel">
+            <h3>Navhard Benchmark Summary</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Stage</th>
+                  <th>NC</th>
+                  <th>DAC</th>
+                  <th>TTC</th>
+                  <th>EP</th>
+                  <th>EPDMS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>LTF*</td>
+                  <td>S1 / S2</td>
+                  <td>96.2 / 77.7</td>
+                  <td>79.5 / 70.2</td>
+                  <td>95.1 / 75.6</td>
+                  <td>84.1 / 85.1</td>
+                  <td>23.1</td>
+                </tr>
+                <tr>
+                  <td>DiffusionDrive*</td>
+                  <td>S1 / S2</td>
+                  <td>96.0 / 82.1</td>
+                  <td>79.7 / 72.2</td>
+                  <td>93.1 / 78.8</td>
+                  <td>81.3 / 85.1</td>
+                  <td>24.2</td>
+                </tr>
+                <tr class="ours">
+                  <td>DriveStack-VLA</td>
+                  <td>S1 / S2</td>
+                  <td>97.9 / 81.0</td>
+                  <td>91.6 / 78.2</td>
+                  <td>96.4 / 76.7</td>
+                  <td>85.2 / 86.1</td>
+                  <td>34.9</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="result-grid">
+            <article class="result-card">
+              <h3>Implementation Details</h3>
+              <p>
+                The BEV encoder uses BEVFormer with a pretrained ResNet-50 backbone and FPN neck. Stage-2 uses
+                K = 3 sampled candidate trajectories, clipping range 0.18, and KL coefficient beta = 0.02.
+              </p>
+            </article>
+            <article class="result-card">
+              <h3>Latency Analysis</h3>
+              <p>
+                The first sampled candidate costs 297 ms. Later candidates reuse visual features and prefix prefill,
+                while the critic adds only about 2 ms for scoring and 6 ms for refinement.
+              </p>
+            </article>
+          </div>
+
+          <div class="ablation-grid">
+            <div class="table-panel">
+              <h3>Driving Reward Ablation</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>NC</th>
+                    <th>TTC</th>
+                    <th>DAC</th>
+                    <th>PDMS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>No</td><td>No</td><td>No</td><td>89.5</td></tr>
+                  <tr><td>Yes</td><td>No</td><td>No</td><td>89.7</td></tr>
+                  <tr><td>Yes</td><td>Yes</td><td>No</td><td>90.1</td></tr>
+                  <tr class="ours"><td>Yes</td><td>Yes</td><td>Yes</td><td>90.5</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-panel">
+              <h3>Format Reward Ablation</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Length</th>
+                    <th>Range</th>
+                    <th>Schema</th>
+                    <th>PDMS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>No</td><td>No</td><td>No</td><td>89.3</td></tr>
+                  <tr><td>Yes</td><td>No</td><td>No</td><td>89.5</td></tr>
+                  <tr><td>Yes</td><td>Yes</td><td>No</td><td>89.9</td></tr>
+                  <tr class="ours"><td>Yes</td><td>Yes</td><td>Yes</td><td>90.5</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="qualitative" class="section">
+        <div class="container content-container">
+          <h2 class="section-title">Qualitative Trajectory Process</h2>
+          <p class="section-intro">
+            The supplementary material describes the same self-critique process for going-straight, left-turn, and
+            right-turn scenarios.
+          </p>
+
+          <div class="process-card">
+            <div class="process-step">
+              <span>1</span>
+              <h3>Sample</h3>
+              <p>Generate multiple candidate trajectories through stochastic action-token sampling.</p>
+            </div>
+            <div class="process-step">
+              <span>2</span>
+              <h3>Score</h3>
+              <p>Rank candidates with the Stage-3 scoring head.</p>
+            </div>
+            <div class="process-step">
+              <span>3</span>
+              <h3>Select</h3>
+              <p>Output the highest-scoring candidate when confidence is sufficient.</p>
+            </div>
+            <div class="process-step">
+              <span>4</span>
+              <h3>Refine</h3>
+              <p>Otherwise refine the candidate closest to the confidence threshold.</p>
+            </div>
+          </div>
+
+          <div class="legend-panel">
+            <div><span class="dot selected"></span>Final selected plan</div>
+            <div><span class="dot candidate"></span>Other candidates</div>
+            <div><span class="dot gt"></span>Ground truth</div>
+            <div><span class="dot source"></span>Refine source</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          Prepared for double-blind review. No author names, affiliations, or non-anonymous repository links
+          are shown.
+        </p>
+      </div>
+    </footer>
+
+    <script src="static/js/site.js"></script>
+  </body>
+</html>
