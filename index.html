@@ -12,7 +12,7 @@
     >
     <title>DriveStack-VLA | Anonymous Project Page</title>
     <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="static/css/site.css?v=results-tables">
+    <link rel="stylesheet" href="static/css/site.css?v=more-results-front">
   </head>
   <body>
     <main id="top">
@@ -28,9 +28,9 @@
           <div class="link-block">
             <a class="button is-dark" href="#abstract">Abstract</a>
             <a class="button is-dark" href="#visual-evidence">Visual Evidence</a>
+            <a class="button is-dark" href="#more-results">More Results</a>
             <a class="button is-dark" href="#architecture">Architecture</a>
             <a class="button is-dark" href="#training">Training</a>
-            <a class="button is-dark" href="#results">Results</a>
           </div>
         </div>
       </section>
@@ -132,126 +132,13 @@
               </p>
             </article>
 
-            <article class="visual-card visual-card-wide">
-              <figure>
-                <img
-                  src="static/images/latency-tradeoff.png?v=source-figs"
-                  alt="Latency and PDMS trade-off for scoring and refinement"
-                  width="1800"
-                  height="1006"
-                >
-              </figure>
-              <h3>Small Candidate Sets Are Enough</h3>
-              <p>
-                Scoring plus refinement gives consistent gains while saturating early, reaching a practical operating
-                point with a small number of sampled candidates.
-              </p>
-            </article>
           </div>
         </div>
       </section>
 
-      <section id="architecture" class="section">
+      <section id="more-results" class="section">
         <div class="container wide-container">
-          <h2 class="section-title">Architecture</h2>
-          <p class="section-intro">
-            The actor generates action tokens from camera, BEV, instruction, and ego-state inputs. The critic reuses
-            visual hidden states to rank candidate trajectories and conditionally refine the selected plan.
-          </p>
-
-          <figure class="figure-panel">
-            <img
-              src="static/images/method-architecture.png?v=source-figs"
-              alt="DriveStack-VLA actor-critic architecture"
-              width="2376"
-              height="1276"
-            >
-          </figure>
-
-          <div class="method-grid">
-            <article class="method-card">
-              <span class="tag">Actor</span>
-              <h3>Multilevel Visual Injection</h3>
-              <p>
-                Camera and BEV tokens are projected into the VLM decoder through a DeepStack-style pathway, allowing
-                multiple decoder blocks to access scene geometry while producing action-token sequences.
-              </p>
-            </article>
-            <article class="method-card">
-              <span class="tag">Critic</span>
-              <h3>Candidate Ranking</h3>
-              <p>
-                The scoring head uses the final visual hidden states and candidate trajectories to estimate trajectory
-                quality, enabling best-of-K selection without expensive text generation.
-              </p>
-            </article>
-            <article class="method-card">
-              <span class="tag">Refinement</span>
-              <h3>Residual Correction</h3>
-              <p>
-                When the top candidate falls below a confidence threshold, the refinement head predicts bounded
-                residuals to improve the trajectory while preserving decoder efficiency.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="training" class="section is-light">
-        <div class="container wide-container">
-          <h2 class="section-title">Three-Stage Training Recipe</h2>
-          <p class="section-intro">
-            The training pipeline separates visual grounding, reward alignment, and efficient inference-time
-            trajectory selection.
-          </p>
-
-          <figure class="publication-banner training-banner">
-            <img
-              src="static/images/training-pipeline.png?v=source-figs"
-              alt="Three-stage training pipeline of DriveStack-VLA"
-              width="2376"
-              height="1117"
-            >
-          </figure>
-
-          <div class="stage-stack">
-            <article class="stage-card">
-              <div class="stage-index">1</div>
-              <div>
-                <h3>Render-Teacher Alignment</h3>
-                <p>
-                  Stage 1 aligns real-camera perception with rasterized render-teacher signals through masked
-                  camera-token alignment and action-to-vision attention distillation.
-                </p>
-              </div>
-            </article>
-            <article class="stage-card">
-              <div class="stage-index">2</div>
-              <div>
-                <h3>Reward-Driven Candidate Generation</h3>
-                <p>
-                  Stage 2 applies GRPO-style fine-tuning with a joint reward: trajectory-space driving quality
-                  encourages safe proposals, while token-space format reward keeps outputs strictly decodable.
-                </p>
-              </div>
-            </article>
-            <article class="stage-card">
-              <div class="stage-index">3</div>
-              <div>
-                <h3>Self-Critique Heads</h3>
-                <p>
-                  Stage 3 freezes the actor and trains compact scoring and refinement heads, turning multimodal
-                  sampling into a fast score-select-refine process.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="results" class="section">
-        <div class="container wide-container">
-          <h2 class="section-title">Key Results</h2>
+          <h2 class="section-title">More Results</h2>
           <div class="table-panel">
             <h3>Navhard Benchmark</h3>
             <table>
@@ -334,6 +221,104 @@
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="section is-light">
+        <div class="container wide-container">
+          <h2 class="section-title">Architecture</h2>
+          <p class="section-intro">
+            The actor generates action tokens from camera, BEV, instruction, and ego-state inputs. The critic reuses
+            visual hidden states to rank candidate trajectories and conditionally refine the selected plan.
+          </p>
+
+          <figure class="figure-panel">
+            <img
+              src="static/images/method-architecture.png?v=source-figs"
+              alt="DriveStack-VLA actor-critic architecture"
+              width="2376"
+              height="1276"
+            >
+          </figure>
+
+          <div class="method-grid">
+            <article class="method-card">
+              <span class="tag">Actor</span>
+              <h3>Multilevel Visual Injection</h3>
+              <p>
+                Camera and BEV tokens are projected into the VLM decoder through a DeepStack-style pathway, allowing
+                multiple decoder blocks to access scene geometry while producing action-token sequences.
+              </p>
+            </article>
+            <article class="method-card">
+              <span class="tag">Critic</span>
+              <h3>Candidate Ranking</h3>
+              <p>
+                The scoring head uses the final visual hidden states and candidate trajectories to estimate trajectory
+                quality, enabling best-of-K selection without expensive text generation.
+              </p>
+            </article>
+            <article class="method-card">
+              <span class="tag">Refinement</span>
+              <h3>Residual Correction</h3>
+              <p>
+                When the top candidate falls below a confidence threshold, the refinement head predicts bounded
+                residuals to improve the trajectory while preserving decoder efficiency.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="training" class="section">
+        <div class="container wide-container">
+          <h2 class="section-title">Three-Stage Training Recipe</h2>
+          <p class="section-intro">
+            The training pipeline separates visual grounding, reward alignment, and efficient inference-time
+            trajectory selection.
+          </p>
+
+          <figure class="publication-banner training-banner">
+            <img
+              src="static/images/training-pipeline.png?v=source-figs"
+              alt="Three-stage training pipeline of DriveStack-VLA"
+              width="2376"
+              height="1117"
+            >
+          </figure>
+
+          <div class="stage-stack">
+            <article class="stage-card">
+              <div class="stage-index">1</div>
+              <div>
+                <h3>Render-Teacher Alignment</h3>
+                <p>
+                  Stage 1 aligns real-camera perception with rasterized render-teacher signals through masked
+                  camera-token alignment and action-to-vision attention distillation.
+                </p>
+              </div>
+            </article>
+            <article class="stage-card">
+              <div class="stage-index">2</div>
+              <div>
+                <h3>Reward-Driven Candidate Generation</h3>
+                <p>
+                  Stage 2 applies GRPO-style fine-tuning with a joint reward: trajectory-space driving quality
+                  encourages safe proposals, while token-space format reward keeps outputs strictly decodable.
+                </p>
+              </div>
+            </article>
+            <article class="stage-card">
+              <div class="stage-index">3</div>
+              <div>
+                <h3>Self-Critique Heads</h3>
+                <p>
+                  Stage 3 freezes the actor and trains compact scoring and refinement heads, turning multimodal
+                  sampling into a fast score-select-refine process.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
