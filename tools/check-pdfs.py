@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PDFS = [ROOT / "static/pdfs/paper.pdf", ROOT / "static/pdfs/supplementary.pdf"]
+PDFS = [ROOT / "static/pdfs/main-paper.pdf", ROOT / "static/pdfs/technical-report.pdf"]
 TERM_FILE = ROOT / "tools/anonymity_terms.txt"
 
 PATTERNS = [

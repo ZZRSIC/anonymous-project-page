@@ -1,16 +1,17 @@
 # DriveStack-VLA Anonymous Project Page
 
-Static GitHub Pages site for a strict double-blind review project page. It is designed for an anonymous GitHub account, then a second anonymous link generated through `anonymous.4open.science`.
+Static GitHub Pages site for a strict double-blind review project page. It is designed for an anonymous GitHub account and a clean project-page link.
 
 ## Page Content
 
-The deployable page intentionally does not publish or embed PDF files. The appendix content has been extracted into
-native webpage sections:
+The deployable page intentionally does not publish or embed PDF files. Selected paper figures, visualizations, and
+technical explanations have been extracted into native webpage sections:
 
 - `Overview`: abstract and headline metrics.
-- `Supplementary RFT Details`: KL regularization, joint reward, and GRPO training loop.
-- `Additional Experiments`: Navhard, implementation, latency, and ablation summaries.
-- `Qualitative Trajectory Process`: extracted text summary of the appendix qualitative section.
+- `Architecture`: actor-critic overview and model components.
+- `Training`: three-stage learning recipe.
+- `Visual Evidence`: qualitative trajectories, attention alignment, and latency/accuracy trade-off.
+- `Candidate Reasoning`: multi-scenario candidate selection and refinement visualizations.
 
 Use `materials/` only for local intake from Overleaf exports. Do not commit raw source exports or PDFs unless explicitly
 needed for the final release.
@@ -34,8 +35,8 @@ Open `index.html` directly in a browser or serve the directory with any static f
 1. Push this repository to a new anonymous GitHub account.
 2. Enable GitHub Pages for the repository.
 3. Confirm the page and all local assets load without login.
-4. Create an anonymous repository link at `https://anonymous.4open.science/`.
-5. Put only the 4open anonymous link in the review manuscript and supplementary material.
+4. Use the anonymous GitHub Pages URL as the review project-page link.
+5. Use a repository anonymization service only if a separate code/archive link is required.
 
 ## Attribution
 
