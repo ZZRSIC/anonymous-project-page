@@ -76,7 +76,7 @@
                 <span>03</span>
                 <div>
                   <h3>Self-Critique Planning</h3>
-                  <p>A compact critic ranks candidate trajectories and refines the best future when needed.</p>
+                  <p>A compact score head ranks candidate trajectories and refines the best future when needed.</p>
                 </div>
               </div>
             </aside>
@@ -216,7 +216,7 @@
                 </thead>
                 <tbody>
                   <tr><td>AutoVLA</td><td>0.40</td><td>0.20</td></tr>
-                  <tr><td>DriveStack-VLA w/o Self-Critic</td><td>0.35</td><td>0.11</td></tr>
+                  <tr><td>DriveStack-VLA w/o Score Head</td><td>0.35</td><td>0.11</td></tr>
                   <tr class="ours"><td>DriveStack-VLA</td><td>0.34</td><td>0.07</td></tr>
                 </tbody>
               </table>
@@ -229,14 +229,14 @@
         <div class="container wide-container">
           <h2 class="section-title">Architecture</h2>
           <p class="section-intro">
-            The actor generates action tokens from camera, BEV, instruction, and ego-state inputs. The critic reuses
-            visual hidden states to rank candidate trajectories and conditionally refine the selected plan.
+            The actor generates action tokens from camera, BEV, instruction, and ego-state inputs. The score head
+            reuses visual hidden states to rank candidate trajectories and conditionally refine the selected plan.
           </p>
 
           <figure class="figure-panel">
             <img
               src="static/images/method-architecture.png?v=source-figs"
-              alt="DriveStack-VLA actor-critic architecture"
+              alt="DriveStack-VLA actor-score architecture"
               width="2376"
               height="1276"
             >
@@ -252,7 +252,7 @@
               </p>
             </article>
             <article class="method-card">
-              <span class="tag">Critic</span>
+              <span class="tag">Score</span>
               <h3>Candidate Ranking</h3>
               <p>
                 The scoring head uses the final visual hidden states and candidate trajectories to estimate trajectory

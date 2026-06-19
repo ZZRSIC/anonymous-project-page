@@ -10,7 +10,7 @@ technical explanations have been extracted into native webpage sections:
 - `Abstract`: paper summary and core contributions.
 - `Visual Evidence`: qualitative trajectories and attention alignment.
 - `More Results`: Navhard, Turning-nuScenes, and nuScenes evaluation tables.
-- `Architecture`: actor-critic overview and model components.
+- `Architecture`: actor-score overview and model components.
 - `Training`: three-stage learning recipe.
 
 Use `materials/` only for local intake from Overleaf exports. Do not commit raw source exports or PDFs unless explicitly
