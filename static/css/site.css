@@ -94,6 +94,10 @@ th {
   width: min(1160px, calc(100% - 2rem));
 }
 
+.reasoning-container {
+  width: min(920px, calc(100% - 2rem));
+}
+
 .publication-header {
   border-bottom: 1px solid var(--line);
   background:
@@ -466,7 +470,7 @@ th {
 }
 
 .trajectory-card figure {
-  max-height: 760px;
+  max-height: 620px;
   overflow-y: auto;
   border-width: 0 0 1px;
   border-radius: 0;
@@ -519,7 +523,7 @@ th {
   }
 
   .trajectory-card figure {
-    max-height: none;
+    max-height: 560px;
   }
 }
 
@@ -544,6 +548,10 @@ th {
 
   .stage-card {
     grid-template-columns: 1fr;
+  }
+
+  .trajectory-card figure {
+    max-height: 440px;
   }
 }
 

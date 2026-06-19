@@ -12,7 +12,7 @@
     >
     <title>DriveStack-VLA | Anonymous Project Page</title>
     <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="static/css/site.css">
+    <link rel="stylesheet" href="static/css/site.css?v=reasoning-small">
   </head>
   <body>
     <main id="top">
@@ -311,41 +311,37 @@
 
           <div class="ablation-grid">
             <div class="table-panel">
-              <h3>Driving Reward Ablation</h3>
+              <h3>Turning-nuScenes Evaluation</h3>
               <table>
                 <thead>
                   <tr>
-                    <th>NC</th>
-                    <th>TTC</th>
-                    <th>DAC</th>
-                    <th>PDMS</th>
+                    <th>Method</th>
+                    <th>L2↓</th>
+                    <th>Col.↓</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>No</td><td>No</td><td>No</td><td>89.5</td></tr>
-                  <tr><td>Yes</td><td>No</td><td>No</td><td>89.7</td></tr>
-                  <tr><td>Yes</td><td>Yes</td><td>No</td><td>90.1</td></tr>
-                  <tr class="ours"><td>Yes</td><td>Yes</td><td>Yes</td><td>90.5</td></tr>
+                  <tr><td>SparseDrive</td><td>0.86</td><td>0.40</td></tr>
+                  <tr><td>MomAD</td><td>0.76</td><td>0.32</td></tr>
+                  <tr class="ours"><td>DriveStack-VLA</td><td>0.46</td><td>0.18</td></tr>
                 </tbody>
               </table>
             </div>
 
             <div class="table-panel">
-              <h3>Format Reward Ablation</h3>
+              <h3>nuScenes Evaluation</h3>
               <table>
                 <thead>
                   <tr>
-                    <th>Length</th>
-                    <th>Range</th>
-                    <th>Schema</th>
-                    <th>PDMS</th>
+                    <th>Method</th>
+                    <th>L2↓</th>
+                    <th>Col.↓</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>No</td><td>No</td><td>No</td><td>89.3</td></tr>
-                  <tr><td>Yes</td><td>No</td><td>No</td><td>89.5</td></tr>
-                  <tr><td>Yes</td><td>Yes</td><td>No</td><td>89.9</td></tr>
-                  <tr class="ours"><td>Yes</td><td>Yes</td><td>Yes</td><td>90.5</td></tr>
+                  <tr><td>AutoVLA</td><td>0.40</td><td>0.20</td></tr>
+                  <tr><td>DriveStack-VLA w/o Self-Critic</td><td>0.35</td><td>0.11</td></tr>
+                  <tr class="ours"><td>DriveStack-VLA</td><td>0.34</td><td>0.07</td></tr>
                 </tbody>
               </table>
             </div>
@@ -354,7 +350,7 @@
       </section>
 
       <section id="reasoning" class="section is-light">
-        <div class="container wide-container">
+        <div class="container wide-container reasoning-container">
           <h2 class="section-title">Candidate Reasoning Visualizations</h2>
           <p class="section-intro">
             Each scene shows how the method samples multiple trajectories, identifies the best candidate, and
