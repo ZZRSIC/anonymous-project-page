@@ -227,6 +227,29 @@ th {
   width: min(900px, calc(100% - 2rem));
 }
 
+.abstract-container {
+  width: min(1080px, calc(100% - 2rem));
+}
+
+.abstract-heading {
+  margin-bottom: 1.4rem;
+  text-align: center;
+}
+
+.section-kicker {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--teal);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.abstract-heading .section-title {
+  margin-bottom: 0;
+}
+
 .section-title {
   margin-bottom: 1.2rem;
   color: var(--ink);
@@ -250,6 +273,110 @@ th {
   color: #334155;
   font-size: 1.08rem;
   text-align: left;
+}
+
+.abstract-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.85fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.abstract-copy {
+  padding: 0.15rem 0 0.15rem 1.25rem;
+  border-left: 4px solid var(--teal);
+}
+
+.abstract-copy p {
+  color: #2f3f51;
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+.abstract-copy p + p {
+  margin-top: 1rem;
+}
+
+.abstract-highlights {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.highlight-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.82rem;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.highlight-row > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  color: white;
+  background: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.highlight-row:nth-child(2) > span {
+  background: var(--teal);
+}
+
+.highlight-row:nth-child(3) > span {
+  background: var(--amber);
+}
+
+.highlight-row h3 {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 830;
+  line-height: 1.25;
+}
+
+.highlight-row p {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.abstract-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.abstract-metrics div {
+  min-height: 104px;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--soft);
+  text-align: center;
+}
+
+.abstract-metrics span {
+  display: block;
+  color: var(--ink);
+  font-size: 1.45rem;
+  font-weight: 860;
+  line-height: 1.1;
+}
+
+.abstract-metrics p {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.35;
 }
 
 .claim-grid,
@@ -444,12 +571,17 @@ th {
 }
 
 @media (max-width: 980px) {
+  .abstract-layout,
   .claim-grid,
   .method-grid,
   .ablation-grid,
   .visual-grid,
   .metric-row {
     grid-template-columns: 1fr;
+  }
+
+  .abstract-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .visual-card-wide {
@@ -477,6 +609,24 @@ th {
   }
 
   .stage-card {
+    grid-template-columns: 1fr;
+  }
+
+  .abstract-copy {
+    padding: 0.9rem 0 0;
+    border-top: 4px solid var(--teal);
+    border-left: 0;
+  }
+
+  .abstract-copy p {
+    font-size: 1rem;
+  }
+
+  .abstract-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-row {
     grid-template-columns: 1fr;
   }
 }

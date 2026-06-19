@@ -12,7 +12,7 @@
     >
     <title>DriveStack-VLA | Anonymous Project Page</title>
     <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="static/css/site.css?v=abstract-training">
+    <link rel="stylesheet" href="static/css/site.css?v=visual-front">
   </head>
   <body>
     <main id="top">
@@ -27,147 +27,66 @@
 
           <div class="link-block">
             <a class="button is-dark" href="#abstract">Abstract</a>
+            <a class="button is-dark" href="#visual-evidence">Visual Evidence</a>
             <a class="button is-dark" href="#architecture">Architecture</a>
             <a class="button is-dark" href="#training">Training</a>
-            <a class="button is-dark" href="#visual-evidence">Visual Evidence</a>
             <a class="button is-dark" href="#results">Results</a>
           </div>
         </div>
       </section>
 
-      <section id="abstract" class="section">
-        <div class="container content-container">
-          <h2 class="section-title">Abstract</h2>
-          <p class="lead">
-            VLA driving models inherit strong language and world knowledge from vision-language backbones, but they
-            still struggle with geometry-aware perception, sparse expert cues, and multimodal trajectory choice.
-            DriveStack-VLA addresses these issues by combining BEV geometry, render-based visual supervision, and
-            a self-critique module that can rank and refine sampled trajectories.
-          </p>
-
-          <div class="claim-grid">
-            <article class="claim-card">
-              <span class="tag">Geometry</span>
-              <h3>BEV DeepStack Injection</h3>
-              <p>
-                A top-down BEV branch is injected into the language-model decoder so action tokens receive explicit
-                geometric context in addition to front-view visual features.
-              </p>
-            </article>
-            <article class="claim-card">
-              <span class="tag">Alignment</span>
-              <h3>Render-Teacher Signals</h3>
-              <p>
-                Rasterized render views guide camera-token alignment and action-to-vision attention, encouraging the
-                policy to focus on drivable lanes, nearby vehicles, and safety-critical regions.
-              </p>
-            </article>
-            <article class="claim-card">
-              <span class="tag">Reasoning</span>
-              <h3>Score, Select, Refine</h3>
-              <p>
-                Instead of trusting a single decoded trajectory, the model samples candidates, scores them with a
-                compact critic, and applies residual refinement when confidence is insufficient.
-              </p>
-            </article>
+      <section id="abstract" class="section abstract-section">
+        <div class="container abstract-container">
+          <div class="abstract-heading">
+            <span class="section-kicker">Paper Summary</span>
+            <h2 class="section-title">Abstract</h2>
           </div>
-        </div>
-      </section>
 
-      <section id="architecture" class="section is-light">
-        <div class="container wide-container">
-          <h2 class="section-title">Architecture</h2>
-          <p class="section-intro">
-            The actor generates action tokens from camera, BEV, instruction, and ego-state inputs. The critic reuses
-            visual hidden states to rank candidate trajectories and conditionally refine the selected plan.
-          </p>
+          <div class="abstract-layout">
+            <div class="abstract-copy">
+              <p>
+                Vision-Language-Action driving models adapt pretrained VLMs into trajectory planners, gaining world
+                knowledge and language-following ability. Yet current VLA driving systems remain limited by weak
+                visual geometry modeling, sparse expert coverage of safety-critical cues, and insufficient support for
+                multimodal trajectory outputs.
+              </p>
+              <p>
+                DriveStack-VLA addresses these limitations with a BEV-enhanced VLM decoder, render-teacher supervision
+                for perceptual grounding, GRPO-based reward alignment, and a lightweight self-critique module that
+                scores sampled futures and conditionally refines the selected trajectory.
+              </p>
+            </div>
 
-          <figure class="figure-panel">
-            <img
-              src="static/images/method-architecture.png?v=source-figs"
-              alt="DriveStack-VLA actor-critic architecture"
-              width="2376"
-              height="1276"
-            >
-          </figure>
-
-          <div class="method-grid">
-            <article class="method-card">
-              <span class="tag">Actor</span>
-              <h3>Multilevel Visual Injection</h3>
-              <p>
-                Camera and BEV tokens are projected into the VLM decoder through a DeepStack-style pathway, allowing
-                multiple decoder blocks to access scene geometry while producing action-token sequences.
-              </p>
-            </article>
-            <article class="method-card">
-              <span class="tag">Critic</span>
-              <h3>Candidate Ranking</h3>
-              <p>
-                The scoring head uses the final visual hidden states and candidate trajectories to estimate trajectory
-                quality, enabling best-of-K selection without expensive text generation.
-              </p>
-            </article>
-            <article class="method-card">
-              <span class="tag">Refinement</span>
-              <h3>Residual Correction</h3>
-              <p>
-                When the top candidate falls below a confidence threshold, the refinement head predicts bounded
-                residuals to improve the trajectory while preserving decoder efficiency.
-              </p>
-            </article>
+            <aside class="abstract-highlights" aria-label="Key contributions">
+              <div class="highlight-row">
+                <span>01</span>
+                <div>
+                  <h3>Geometry-Aware Visual Tokens</h3>
+                  <p>BEV features are injected into the LLM decoder through a multilevel DeepStack pathway.</p>
+                </div>
+              </div>
+              <div class="highlight-row">
+                <span>02</span>
+                <div>
+                  <h3>Render-Teacher Alignment</h3>
+                  <p>Rasterized views guide attention toward drivable structure and safety-critical objects.</p>
+                </div>
+              </div>
+              <div class="highlight-row">
+                <span>03</span>
+                <div>
+                  <h3>Self-Critique Planning</h3>
+                  <p>A compact critic ranks candidate trajectories and refines the best future when needed.</p>
+                </div>
+              </div>
+            </aside>
           </div>
-        </div>
-      </section>
 
-      <section id="training" class="section">
-        <div class="container wide-container">
-          <h2 class="section-title">Three-Stage Training Recipe</h2>
-          <p class="section-intro">
-            The training pipeline separates visual grounding, reward alignment, and efficient inference-time
-            trajectory selection.
-          </p>
-
-          <figure class="publication-banner training-banner">
-            <img
-              src="static/images/training-pipeline.png?v=source-figs"
-              alt="Three-stage training pipeline of DriveStack-VLA"
-              width="2376"
-              height="1117"
-            >
-          </figure>
-
-          <div class="stage-stack">
-            <article class="stage-card">
-              <div class="stage-index">1</div>
-              <div>
-                <h3>Render-Teacher Alignment</h3>
-                <p>
-                  Stage 1 aligns real-camera perception with rasterized render-teacher signals through masked
-                  camera-token alignment and action-to-vision attention distillation.
-                </p>
-              </div>
-            </article>
-            <article class="stage-card">
-              <div class="stage-index">2</div>
-              <div>
-                <h3>Reward-Driven Candidate Generation</h3>
-                <p>
-                  Stage 2 applies GRPO-style fine-tuning with a joint reward: trajectory-space driving quality
-                  encourages safe proposals, while token-space format reward keeps outputs strictly decodable.
-                </p>
-              </div>
-            </article>
-            <article class="stage-card">
-              <div class="stage-index">3</div>
-              <div>
-                <h3>Self-Critique Heads</h3>
-                <p>
-                  Stage 3 freezes the actor and trains compact scoring and refinement heads, turning multimodal
-                  sampling into a fast score-select-refine process.
-                </p>
-              </div>
-            </article>
+          <div class="abstract-metrics" aria-label="Main results">
+            <div><span>91.6</span><p>PDMS on NAVSIMv1</p></div>
+            <div><span>91.0</span><p>EPDMS on NAVSIMv2</p></div>
+            <div><span>79.49</span><p>Bench2Drive driving score</p></div>
+            <div><span>56.36%</span><p>Bench2Drive success rate</p></div>
           </div>
         </div>
       </section>
@@ -227,6 +146,104 @@
                 Scoring plus refinement gives consistent gains while saturating early, reaching a practical operating
                 point with a small number of sampled candidates.
               </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="section">
+        <div class="container wide-container">
+          <h2 class="section-title">Architecture</h2>
+          <p class="section-intro">
+            The actor generates action tokens from camera, BEV, instruction, and ego-state inputs. The critic reuses
+            visual hidden states to rank candidate trajectories and conditionally refine the selected plan.
+          </p>
+
+          <figure class="figure-panel">
+            <img
+              src="static/images/method-architecture.png?v=source-figs"
+              alt="DriveStack-VLA actor-critic architecture"
+              width="2376"
+              height="1276"
+            >
+          </figure>
+
+          <div class="method-grid">
+            <article class="method-card">
+              <span class="tag">Actor</span>
+              <h3>Multilevel Visual Injection</h3>
+              <p>
+                Camera and BEV tokens are projected into the VLM decoder through a DeepStack-style pathway, allowing
+                multiple decoder blocks to access scene geometry while producing action-token sequences.
+              </p>
+            </article>
+            <article class="method-card">
+              <span class="tag">Critic</span>
+              <h3>Candidate Ranking</h3>
+              <p>
+                The scoring head uses the final visual hidden states and candidate trajectories to estimate trajectory
+                quality, enabling best-of-K selection without expensive text generation.
+              </p>
+            </article>
+            <article class="method-card">
+              <span class="tag">Refinement</span>
+              <h3>Residual Correction</h3>
+              <p>
+                When the top candidate falls below a confidence threshold, the refinement head predicts bounded
+                residuals to improve the trajectory while preserving decoder efficiency.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="training" class="section is-light">
+        <div class="container wide-container">
+          <h2 class="section-title">Three-Stage Training Recipe</h2>
+          <p class="section-intro">
+            The training pipeline separates visual grounding, reward alignment, and efficient inference-time
+            trajectory selection.
+          </p>
+
+          <figure class="publication-banner training-banner">
+            <img
+              src="static/images/training-pipeline.png?v=source-figs"
+              alt="Three-stage training pipeline of DriveStack-VLA"
+              width="2376"
+              height="1117"
+            >
+          </figure>
+
+          <div class="stage-stack">
+            <article class="stage-card">
+              <div class="stage-index">1</div>
+              <div>
+                <h3>Render-Teacher Alignment</h3>
+                <p>
+                  Stage 1 aligns real-camera perception with rasterized render-teacher signals through masked
+                  camera-token alignment and action-to-vision attention distillation.
+                </p>
+              </div>
+            </article>
+            <article class="stage-card">
+              <div class="stage-index">2</div>
+              <div>
+                <h3>Reward-Driven Candidate Generation</h3>
+                <p>
+                  Stage 2 applies GRPO-style fine-tuning with a joint reward: trajectory-space driving quality
+                  encourages safe proposals, while token-space format reward keeps outputs strictly decodable.
+                </p>
+              </div>
+            </article>
+            <article class="stage-card">
+              <div class="stage-index">3</div>
+              <div>
+                <h3>Self-Critique Heads</h3>
+                <p>
+                  Stage 3 freezes the actor and trains compact scoring and refinement heads, turning multimodal
+                  sampling into a fast score-select-refine process.
+                </p>
+              </div>
             </article>
           </div>
         </div>

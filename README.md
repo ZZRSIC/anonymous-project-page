@@ -8,9 +8,9 @@ The deployable page intentionally does not publish or embed PDF files. Selected 
 technical explanations have been extracted into native webpage sections:
 
 - `Abstract`: paper summary and core contributions.
+- `Visual Evidence`: qualitative trajectories, attention alignment, and latency/accuracy trade-off.
 - `Architecture`: actor-critic overview and model components.
 - `Training`: three-stage learning recipe.
-- `Visual Evidence`: qualitative trajectories, attention alignment, and latency/accuracy trade-off.
 - `Key Results`: Navhard, Turning-nuScenes, and nuScenes evaluation tables.
 
 Use `materials/` only for local intake from Overleaf exports. Do not commit raw source exports or PDFs unless explicitly
