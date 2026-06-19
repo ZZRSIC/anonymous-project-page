@@ -95,7 +95,7 @@ th {
 }
 
 .reasoning-container {
-  width: min(920px, calc(100% - 2rem));
+  width: min(800px, calc(100% - 2rem));
 }
 
 .publication-header {
@@ -470,7 +470,7 @@ th {
 }
 
 .trajectory-card figure {
-  max-height: 620px;
+  max-height: 520px;
   overflow-y: auto;
   border-width: 0 0 1px;
   border-radius: 0;
@@ -523,7 +523,7 @@ th {
   }
 
   .trajectory-card figure {
-    max-height: 560px;
+    max-height: 480px;
   }
 }
 
@@ -551,7 +551,7 @@ th {
   }
 
   .trajectory-card figure {
-    max-height: 440px;
+    max-height: 360px;
   }
 }
 
