@@ -12,7 +12,7 @@
     >
     <title>DriveStack-VLA | Anonymous Project Page</title>
     <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="static/css/site.css?v=reasoning-compact">
+    <link rel="stylesheet" href="static/css/site.css?v=abstract-training">
   </head>
   <body>
     <main id="top">
@@ -26,36 +26,18 @@
           <p class="publication-authors">Anonymous Authors</p>
 
           <div class="link-block">
-            <a class="button is-dark" href="#overview">Overview</a>
+            <a class="button is-dark" href="#abstract">Abstract</a>
             <a class="button is-dark" href="#architecture">Architecture</a>
             <a class="button is-dark" href="#training">Training</a>
             <a class="button is-dark" href="#visual-evidence">Visual Evidence</a>
             <a class="button is-dark" href="#results">Results</a>
-            <a class="button is-dark" href="#reasoning">Candidate Reasoning</a>
           </div>
         </div>
       </section>
 
-      <section class="teaser-section">
-        <div class="container">
-          <figure class="publication-banner">
-            <img
-              src="static/images/training-pipeline.png?v=source-figs"
-              alt="Three-stage training pipeline of DriveStack-VLA"
-              width="2376"
-              height="1117"
-            >
-          </figure>
-          <p class="teaser-caption">
-            DriveStack-VLA trains a VLA driving policy in three stages: visual grounding through Render-Teacher
-            Alignment, reward-driven candidate generation, and lightweight self-critique for scoring and refinement.
-          </p>
-        </div>
-      </section>
-
-      <section id="overview" class="section">
+      <section id="abstract" class="section">
         <div class="container content-container">
-          <h2 class="section-title">What This Work Solves</h2>
+          <h2 class="section-title">Abstract</h2>
           <p class="lead">
             VLA driving models inherit strong language and world knowledge from vision-language backbones, but they
             still struggle with geometry-aware perception, sparse expert cues, and multimodal trajectory choice.
@@ -139,12 +121,21 @@
       </section>
 
       <section id="training" class="section">
-        <div class="container content-container">
+        <div class="container wide-container">
           <h2 class="section-title">Three-Stage Training Recipe</h2>
           <p class="section-intro">
             The training pipeline separates visual grounding, reward alignment, and efficient inference-time
             trajectory selection.
           </p>
+
+          <figure class="publication-banner training-banner">
+            <img
+              src="static/images/training-pipeline.png?v=source-figs"
+              alt="Three-stage training pipeline of DriveStack-VLA"
+              width="2376"
+              height="1117"
+            >
+          </figure>
 
           <div class="stage-stack">
             <article class="stage-card">
@@ -349,55 +340,6 @@
         </div>
       </section>
 
-      <section id="reasoning" class="section is-light">
-        <div class="container wide-container reasoning-container">
-          <h2 class="section-title">Candidate Reasoning Visualizations</h2>
-          <p class="section-intro">
-            Each scene shows how the method samples multiple trajectories, identifies the best candidate, and
-            optionally refines the plan. Orange marks the final selected trajectory, gray marks alternatives, green is
-            ground truth, and blue marks the refinement source.
-          </p>
-
-          <div class="trajectory-gallery">
-            <article class="trajectory-card">
-              <figure>
-                <img
-                  src="static/images/trajectory-straight.png?v=source-figs"
-                  alt="Candidate trajectory reasoning for a straight-driving scenario"
-                  width="2097"
-                  height="3334"
-                >
-              </figure>
-              <h3>Go Straight</h3>
-              <p>Candidate ranking keeps the selected plan centered and consistent with future motion.</p>
-            </article>
-            <article class="trajectory-card">
-              <figure>
-                <img
-                  src="static/images/trajectory-left.png?v=source-figs"
-                  alt="Candidate trajectory reasoning for a left-turn scenario"
-                  width="2097"
-                  height="3334"
-                >
-              </figure>
-              <h3>Turn Left</h3>
-              <p>The critic separates unsafe or off-route samples from the final lane-following turn.</p>
-            </article>
-            <article class="trajectory-card">
-              <figure>
-                <img
-                  src="static/images/trajectory-right.png?v=source-figs"
-                  alt="Candidate trajectory reasoning for a right-turn scenario"
-                  width="2097"
-                  height="3334"
-                >
-              </figure>
-              <h3>Turn Right</h3>
-              <p>Refinement improves the chosen sample in dense intersections while preserving feasible geometry.</p>
-            </article>
-          </div>
-        </div>
-      </section>
     </main>
 
     <script src="static/js/site.js"></script>
