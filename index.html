@@ -21,7 +21,7 @@
           <p class="eyebrow">End-to-End Autonomous Driving</p>
           <h1 class="publication-title">DriveStack-VLA</h1>
           <p class="publication-subtitle">
-            Render-Teacher Alignment and Self-Critique for Vision-Language-Action Driving
+            Rasterized Image Feature Alignment for BEV-Based DeepStack Vision-Language-Action Driving
           </p>
           <p class="publication-authors">Anonymous Authors</p>
 
@@ -45,15 +45,17 @@
           <div class="abstract-layout">
             <div class="abstract-copy">
               <p>
-                Vision-Language-Action driving models adapt pretrained VLMs into trajectory planners, gaining world
-                knowledge and language-following ability. Yet current VLA driving systems remain limited by weak
-                visual geometry modeling, sparse expert coverage of safety-critical cues, and insufficient support for
-                multimodal trajectory outputs.
+                Vision-Language-Action driving models adapt pretrained VLMs into trajectory planners, allowing driving
+                policies to inherit world knowledge and follow language guidance. Yet reliable autonomous driving is a
+                spatial decision-making problem: the model must reason about metric geometry, top-down scene structure,
+                future motion, and safety-critical perceptual cues, rather than relying only on perspective image
+                tokens and language priors.
               </p>
               <p>
-                DriveStack-VLA addresses these limitations with a BEV-enhanced VLM decoder, render-teacher supervision
-                for perceptual grounding, GRPO-based reward alignment, and a lightweight self-critique module that
-                scores sampled futures and conditionally refines the selected trajectory.
+                DriveStack-VLA strengthens this spatial grounding from both the model and data sides. It injects BEV
+                representations into the LLM decoder through DeepStack connections, aligns real-image attention with
+                rasterized render-teacher cues, applies reward-driven fine-tuning for trajectory proposals, and uses
+                lightweight scoring and refinement heads to select and improve candidate futures.
               </p>
             </div>
 
@@ -61,22 +63,22 @@
               <div class="highlight-row">
                 <span>01</span>
                 <div>
-                  <h3>Geometry-Aware Visual Tokens</h3>
-                  <p>BEV features are injected into the LLM decoder through a multilevel DeepStack pathway.</p>
+                  <h3>BEV DeepStack Injection</h3>
+                  <p>Top-down BEV features provide metric geometric priors through a multilevel decoder interface.</p>
                 </div>
               </div>
               <div class="highlight-row">
                 <span>02</span>
                 <div>
-                  <h3>Render-Teacher Alignment</h3>
-                  <p>Rasterized views guide attention toward drivable structure and safety-critical objects.</p>
+                  <h3>Rasterized Feature Alignment</h3>
+                  <p>Rasterized views guide real-image attention toward lanes, agents, and planning-relevant cues.</p>
                 </div>
               </div>
               <div class="highlight-row">
                 <span>03</span>
                 <div>
-                  <h3>Self-Critique Planning</h3>
-                  <p>A compact score head ranks candidate trajectories and refines the best future when needed.</p>
+                  <h3>Score-Guided Refinement</h3>
+                  <p>Lightweight heads rank sampled trajectories and refine low-confidence futures when needed.</p>
                 </div>
               </div>
             </aside>
