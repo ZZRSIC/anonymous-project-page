@@ -382,7 +382,7 @@ th {
 .claim-grid,
 .method-grid,
 .ablation-grid,
-.video-grid,
+.motion-grid,
 .visual-grid {
   display: grid;
   gap: 1rem;
@@ -397,7 +397,7 @@ th {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.video-grid {
+.motion-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-bottom: 1rem;
 }
@@ -532,23 +532,23 @@ th {
   padding: 0.28rem;
 }
 
-.video-card figure {
+.motion-card {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   aspect-ratio: 5 / 4;
   background: #0f172a;
+  box-shadow: var(--shadow-sm);
 }
 
-.video-card video {
+.motion-card img {
   display: block;
   width: 100%;
   height: 100%;
   padding: 0.28rem;
   background: #0f172a;
   object-fit: contain;
-}
-
-.video-card h3 {
-  margin-bottom: 0;
-  text-align: center;
 }
 
 .table-panel {
@@ -571,7 +571,7 @@ th {
   .claim-grid,
   .method-grid,
   .ablation-grid,
-  .video-grid,
+  .motion-grid,
   .visual-grid {
     grid-template-columns: 1fr;
   }

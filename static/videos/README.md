@@ -1,9 +1,7 @@
 # Video Assets
 
-Place anonymized reviewer videos here:
+Place anonymized reviewer videos here when the page needs video assets.
 
-- `candidate_01.mp4`
-- `candidate_02.mp4`
-- `candidate_03.mp4`
+The current Visual Evidence animations are committed as GIF files under `static/images/`.
 
 Before release, remove video metadata and check frames for author names, lab logos, terminal usernames, file paths, and non-anonymous URLs.

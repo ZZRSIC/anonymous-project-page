@@ -8,7 +8,7 @@ The deployable page intentionally does not publish or embed PDF files. Selected 
 technical explanations have been extracted into native webpage sections:
 
 - `Abstract`: paper summary and core contributions.
-- `Visual Evidence`: candidate rollout videos, qualitative trajectories, and attention alignment.
+- `Visual Evidence`: animated rollout visualizations, qualitative trajectories, and attention alignment.
 - `More Results`: Navhard, Turning-nuScenes, and nuScenes evaluation tables.
 - `Architecture`: actor-score overview and model components.
 - `Training`: three-stage learning recipe.
