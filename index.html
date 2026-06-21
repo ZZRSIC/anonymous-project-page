@@ -45,17 +45,18 @@
           <div class="abstract-layout">
             <div class="abstract-copy">
               <p>
-                Vision-Language-Action driving models adapt pretrained VLMs into trajectory planners, allowing driving
-                policies to inherit world knowledge and follow language guidance. Yet reliable autonomous driving is a
-                spatial decision-making problem: the model must reason about metric geometry, top-down scene structure,
-                future motion, and safety-critical perceptual cues, rather than relying only on perspective image
-                tokens and language priors.
+                Vision-Language-Action driving models turn pretrained VLMs into trajectory planners that can use world
+                knowledge and follow language guidance. However, reliable autonomous driving requires
+                driving-oriented spatial intelligence: the policy must organize image semantics into metric geometry,
+                top-down scene structure, future motion, and safety-critical cues instead of relying only on
+                perspective image tokens and language priors.
               </p>
               <p>
-                DriveStack-VLA strengthens this spatial grounding from both the model and data sides. It injects BEV
-                representations into the LLM decoder through DeepStack connections, aligns real-image attention with
-                rasterized render-teacher cues, applies reward-driven fine-tuning for trajectory proposals, and uses
-                lightweight scoring and refinement heads to select and improve candidate futures.
+                DriveStack-VLA strengthens this spatial grounding across model, data, and trajectory-selection
+                bottlenecks. BEV DeepStack injection supplies top-down geometric priors to the LLM decoder,
+                Rasterized Image Feature Alignment transfers planning-relevant attention from render-teacher views to
+                real images, and lightweight scoring and refinement heads rank sampled futures and correct
+                low-confidence plans.
               </p>
             </div>
 
@@ -64,21 +65,21 @@
                 <span>01</span>
                 <div>
                   <h3>BEV DeepStack Injection</h3>
-                  <p>Top-down BEV features provide metric geometric priors through a multilevel decoder interface.</p>
+                  <p>Injects top-down BEV memory into the LLM decoder for metric, long-context geometric grounding.</p>
                 </div>
               </div>
               <div class="highlight-row">
                 <span>02</span>
                 <div>
-                  <h3>Rasterized Feature Alignment</h3>
-                  <p>Rasterized views guide real-image attention toward lanes, agents, and planning-relevant cues.</p>
+                  <h3>Rasterized Image Feature Alignment</h3>
+                  <p>Aligns real and rasterized action-to-vision attention around lanes, agents, and traffic cues.</p>
                 </div>
               </div>
               <div class="highlight-row">
                 <span>03</span>
                 <div>
-                  <h3>Score-Guided Refinement</h3>
-                  <p>Lightweight heads rank sampled trajectories and refine low-confidence futures when needed.</p>
+                  <h3>Score-Guided Trajectory Selection</h3>
+                  <p>Ranks multimodal candidates and applies bounded residual refinement when confidence is low.</p>
                 </div>
               </div>
             </aside>
