@@ -382,6 +382,7 @@ th {
 .claim-grid,
 .method-grid,
 .ablation-grid,
+.video-grid,
 .visual-grid {
   display: grid;
   gap: 1rem;
@@ -394,6 +395,11 @@ th {
 
 .ablation-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.video-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 1rem;
 }
 
 .visual-grid {
@@ -526,6 +532,25 @@ th {
   padding: 0.28rem;
 }
 
+.video-card figure {
+  aspect-ratio: 5 / 4;
+  background: #0f172a;
+}
+
+.video-card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0.28rem;
+  background: #0f172a;
+  object-fit: contain;
+}
+
+.video-card h3 {
+  margin-bottom: 0;
+  text-align: center;
+}
+
 .table-panel {
   overflow-x: auto;
   margin-bottom: 1rem;
@@ -546,6 +571,7 @@ th {
   .claim-grid,
   .method-grid,
   .ablation-grid,
+  .video-grid,
   .visual-grid {
     grid-template-columns: 1fr;
   }
